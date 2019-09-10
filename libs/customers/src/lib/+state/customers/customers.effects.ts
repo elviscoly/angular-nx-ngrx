@@ -19,7 +19,7 @@ export class CustomersEffects {
         // Your custom REST 'load' logic goes here. For now just return an empty list...
         return new CustomersLoaded([]);
       },
-      // Load error if there is any
+
       onError: (action: LoadCustomers, error) => {
         console.error('Error', error);
         return new CustomersLoadError(error);
