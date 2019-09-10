@@ -2,13 +2,331 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "dashbard": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/dashbard",
+      "sourceRoot": "apps/dashbard/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/dashbard",
+            "index": "apps/dashbard/src/index.html",
+            "main": "apps/dashbard/src/main.ts",
+            "polyfills": "apps/dashbard/src/polyfills.ts",
+            "tsConfig": "apps/dashbard/tsconfig.app.json",
+            "assets": [
+              "apps/dashbard/src/favicon.ico",
+              "apps/dashbard/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/dashbard/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/dashbard/src/environments/environment.ts",
+                  "with": "apps/dashbard/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dashbard:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dashbard:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dashbard:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/dashbard/tsconfig.app.json",
+              "apps/dashbard/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/dashbard/jest.config.js",
+            "tsConfig": "apps/dashbard/tsconfig.spec.json",
+            "setupFile": "apps/dashbard/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "dashbard-e2e": {
+      "root": "apps/dashbard-e2e",
+      "sourceRoot": "apps/dashbard-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/dashbard-e2e/cypress.json",
+            "tsConfig": "apps/dashbard-e2e/tsconfig.e2e.json",
+            "devServerTarget": "dashbard:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dashbard:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/dashbard-e2e/tsconfig.e2e.json"
+          }
+        }
+      }
+    },
+    "material": {
+      "projectType": "library",
+      "root": "libs/material",
+      "sourceRoot": "libs/material/src",
+      "prefix": "myworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/material/tsconfig.lib.json",
+              "libs/material/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/material/jest.config.js",
+            "tsConfig": "libs/material/tsconfig.spec.json",
+            "setupFile": "libs/material/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "core-data": {
+      "projectType": "library",
+      "root": "libs/core-data",
+      "sourceRoot": "libs/core-data/src",
+      "prefix": "myworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core-data/tsconfig.lib.json",
+              "libs/core-data/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/core-data/jest.config.js",
+            "tsConfig": "libs/core-data/tsconfig.spec.json",
+            "setupFile": "libs/core-data/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-login": {
+      "projectType": "library",
+      "root": "libs/ui-login",
+      "sourceRoot": "libs/ui-login/src",
+      "prefix": "ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui-login/tsconfig.lib.json",
+              "libs/ui-login/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui-login/jest.config.js",
+            "tsConfig": "libs/ui-login/tsconfig.spec.json",
+            "setupFile": "libs/ui-login/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-toolbar": {
+      "projectType": "library",
+      "root": "libs/ui-toolbar",
+      "sourceRoot": "libs/ui-toolbar/src",
+      "prefix": "ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui-toolbar/tsconfig.lib.json",
+              "libs/ui-toolbar/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui-toolbar/jest.config.js",
+            "tsConfig": "libs/ui-toolbar/tsconfig.spec.json",
+            "setupFile": "libs/ui-toolbar/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "customers": {
+      "projectType": "library",
+      "root": "libs/customers",
+      "sourceRoot": "libs/customers/src",
+      "prefix": "myworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/customers/tsconfig.lib.json",
+              "libs/customers/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/customers/jest.config.js",
+            "tsConfig": "libs/customers/tsconfig.spec.json",
+            "setupFile": "libs/customers/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "state": {
+      "projectType": "library",
+      "root": "libs/state",
+      "sourceRoot": "libs/state/src",
+      "prefix": "myworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/state/tsconfig.lib.json",
+              "libs/state/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/state/jest.config.js",
+            "tsConfig": "libs/state/tsconfig.spec.json",
+            "setupFile": "libs/state/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
       "versionMismatch": false
     },
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/angular"
   },
-  "schematics": {}
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/schematics:component": {
+      "styleext": "scss"
+    }
+  },
+  "defaultProject": "dashbard"
 }

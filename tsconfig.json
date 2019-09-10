@@ -15,7 +15,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@myworkspace/material": ["libs/material/src/index.ts"],
+      "@myworkspace/core-data": ["libs/core-data/src/index.ts"],
+      "@myworkspace/ui-login": ["libs/ui-login/src/index.ts"],
+      "@myworkspace/ui-toolbar": ["libs/ui-toolbar/src/index.ts"],
+      "@myworkspace/customers": ["libs/customers/src/index.ts"],
+      "@myworkspace/state": ["libs/state/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
